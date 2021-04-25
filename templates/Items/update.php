@@ -1,18 +1,28 @@
-<h3>Modifier un item</h3>
+<?= $this->Html->css('custom') ?>
 
-<?php
+<section>
+	<h1 class="title">Modifier un item</h1>
 
-	echo $this->Form->create($item);
+	<div class="form-update-item">
+		<?php
 
-		echo $this->Form->hidden('todolist_id', ['value' => $item->todolist_id]);
+			echo $this->Form->create($item);
 
-		echo $this->Form->control('content');
-		echo $this->Form->control('deadline', ['type' => 'date', 'default' => null]);
-		echo $this->Form->control('status', ['label' => 'Done', 'type' => 'checkbox']);
+				echo $this->Form->hidden('todolist_id', ['value' => $item->todolist_id]);
+
+				echo $this->Form->control('content', ['label' => 'Nom de la tâche']);
+				echo $this->Form->control('deadline', ['type' => 'date', 'default' => null]);
+				echo $this->Form->control('status', ['label' => 'Done', 'type' => 'checkbox']);
 
 
-		echo $this->Form->button('Modifier');
+				echo $this->Form->button('Modifier');
 
-	echo $this->Form->end();
+			echo $this->Form->end();
 
-?>
+		?>
+	</div>
+	
+</section>
+
+
+

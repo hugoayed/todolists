@@ -19,7 +19,7 @@ class ItemsTable extends Table{
 
 	public function validationDefault(Validator $v) : Validator{
 		$v->maxLength('content', 100)
-			-> notEmptyString('content');
+			->notEmptyString('content');
 
 		return $v;
 	}

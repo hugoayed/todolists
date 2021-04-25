@@ -1,3 +1,209 @@
-* {
-	color: blue;
+@import "reset";
+
+
+body {
+	font-family: "Open Sans", Sans-serif;
+	margin: 50px auto 0 auto;
+	// background-color: #222;background: rgb(49,78,206);
+	background: rgba(49,78,206,1);
+	width: 80%;
+	h2{
+		color: red;
+		font-size: 2em;
+		font-weight: 700;
+	}
+	a{
+		color: white;
+	}
+	header{
+		margin-bottom: 50px;
+	}
+	.nav-container{
+		align-items: center;
+		display: flex;
+		justify-content: space-between!important;
+		text-decoration: none;
+		font-size: 1.1em;
+		.navbar{
+			display: flex;
+			align-items: center;
+			justify-content: space-between!important;
+			width: 100%;
+			.navbar-left, .navbar-right{
+				a{
+					text-decoration: none;
+				}
+				// display: flex;
+				// align-items: center;
+			}
+			.navbar-right{
+				a{
+					// margin: 0 15px;
+					padding: 25px 16px;
+				}
+				:hover{
+					border-bottom: 2px solid #f7b;
+				}
+			}
+		}
+	}
+	.success{
+		background-color: #5bff5b;
+		width: fit-content;
+		padding: 15px;
+		border-radius: 5px;
+		margin: 0 auto 50px auto;
+	}
+	.error{
+		background-color: #ff4c4c;
+		width: fit-content;
+		padding: 15px;
+		border-radius: 5px;
+		margin: 0 auto 50px auto;
+	}
+	.hidden{
+		display: none;
+	}
+	section{
+		color: white;
+		.title{
+			font-size: 2.2em;
+			font-weight: 700;
+			text-align: center;
+			color: white;
+		}
+		.list-container{
+			padding: 20px;
+		}
+		.picture{
+			width: fit-content;
+			margin: 20px auto;
+		}
+		.box-list{
+			border-radius: 20px;
+			box-shadow: 2px 5px 20px #122784;
+			padding: 15px 25px;
+			margin: 0 1em 2em 1em;
+			max-width: 250px;
+			float: left;
+			.item, .no-item{
+				padding: 15px;
+				overflow: auto;
+			}
+			h3{
+				font-size: 1.8em;
+				a{
+					text-decoration: none;
+				}
+				:hover{
+					text-decoration: underline;
+				}
+			}
+
+		}
+		.form-login, .form-new-user, .form-update-user{
+			margin: 50px auto;
+			width: 30%;
+			text-align: center;
+			input{
+				border-radius: 5px;
+				width: 100%;
+				height: 2em;
+				margin: 15px 0;
+				font-size: 1.3em;
+				padding: 3px;
+			}
+			button{
+				height: 2.5em;
+				width: 30%;
+				border-radius: 5px;
+				font-family: "Open Sans";
+				background-color: #fff;
+				border: 1px solid #fff;
+				float: right;
+				:hover{
+					cursor: hand;
+					background-color: red;
+					border: 1px solid #fff;
+				}
+			}
+			
+		}
+
+		.form-new-list, .form-update-list, .form-update-item{
+			margin: 50px auto;
+			width: 30%;
+			text-align: left;
+			input{
+				border-radius: 5px;
+				width: 100%;
+				height: 2em;
+				margin: 15px 0;
+				font-size: 1.3em;
+				padding: 3px;
+
+			}
+			.visibility{
+				font-size: 1.5em;
+				display: inline-block;
+				// background-color: red;
+				margin: 15px 0;
+				width: 100%;
+				label{
+					display: inline-block;
+					vertical-align: middle;
+				}
+				input{
+					height: 0.5em;
+				justify-items: space-between;
+				}
+			}
+			button{
+				height: 2.5em;
+				width: 30%;
+				border-radius: 5px;
+				font-family: "Open Sans";
+				font-size: 1.2em;
+				background-color: #fff;
+				border: 1px solid #fff;
+				float: right;
+				:hover{
+					cursor: hand;
+					background-color: red;
+					border: 1px solid #fff;
+				}
+			}
+		}
+
+		.list-items{
+			// border: 2px solid red;
+			font-size: 1.3em;
+			margin: 30px auto;
+			width: 50%;
+			h3{
+				font-size: 1.6em;
+				font-weight: 700;
+				margin-bottom: 20px;
+			}
+			.item{
+				margin: 10px 0;
+			}
+		}
+	}
+	.account-actions{
+		width: fit-content;
+		margin: 20px auto;
+		text-align: center;
+		.button{
+			color: black;
+			height: 2.9em;
+			width: 100%;
+			border-radius: 5px;
+			font-family: "Open Sans";
+			font-size: 1.2em;
+			background-color: #fff;
+			border: 1px solid #fff;
+			margin: 60px auto;
+		}
+	}
 }

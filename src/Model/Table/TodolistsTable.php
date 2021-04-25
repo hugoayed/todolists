@@ -25,14 +25,23 @@ class TodolistsTable extends Table{
 			'dependent' => true, //supprime les items liés à une liste
 			'cascadeCallbacks' => true
 		]);
+
+		$this->hasMany('Copies', [
+			'foreignKey' => 'origin_id',
+			'joinType' => 'INNER'
+		]);
+		
 	}
 
 	public function validationDefault(Validator $v) : Validator{
 		$v->maxLength('title', 100)
 			->notEmptyString('title')
 
-			->notEmptyString('visibility');
+			->notEmptyString('visibility')
 
+			->notEmptyString('origin_id')
+
+			->notEmptyString('newlist_id');
 		return $v;
 	}
 }

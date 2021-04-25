@@ -1,14 +1,20 @@
-<h1>Se connecter</h1>
+<?= $this->Html->css('custom') ?>
 
-<?php
+<section>
+	<h1 class="title">Connexion</h1>
 
-	echo $this->Form->create();
+	<div class="form-login">
+		<?php
 
-		echo $this->Form->control('username', ['label' => 'Nom d\'utilisateur']);
-		echo $this->Form->control('password', ['label' => 'Mot de passe']);
+			echo $this->Form->create();
 
-		echo $this->Form->button('Se connecter');
+				echo $this->Form->control('username', ['label' => '', 'placeholder' => 'Nom d\'utilisateur']);
+				echo $this->Form->control('password', ['label' => '', 'placeholder' => 'Mot de passe']);
 
-	echo $this->Form->end();
+				echo $this->Form->button('Se connecter');
 
-?>
+			echo $this->Form->end();
+
+		?>
+	</div>
+</section>

@@ -5,12 +5,18 @@ namespace App\Controller;
 class ItemsController extends AppController{
 
 	public function index(){
+
+		$this->viewBuilder()->setLayout('custom');
+
 		$i = $this->Items->find('all');
 
 		$this->set(compact('i'));
 	}
 
 	public function new(){
+
+		$this->viewBuilder()->setLayout('custom');
+
 		$new = $this->Items->newEmptyEntity();
 
 		if($this->request->is('post')){
@@ -31,6 +37,9 @@ class ItemsController extends AppController{
 	}
 
 	public function update($id = null){
+
+		$this->viewBuilder()->setLayout('custom');
+		
 		if(empty($id))
 			return $this->redirect(['controller' => 'Todolists','action' => 'index']);
 

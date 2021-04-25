@@ -1,6 +1,6 @@
-<h3>Modifier un item</h3>
+<?= $this->Html->css('custom') ?>
 
-<!-- <h1><?= $itemsss ?></h1> -->
+<h3>Modifier un item</h3>
 
 <?php foreach($lists as $tl): ?>
 	<h4>TITRE LISTE: <?= $tl->title ?></h4>

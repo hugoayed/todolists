@@ -18,8 +18,7 @@ class UsersController extends AppController {
 	
 	public function index(){
 
-		//Custom layout pour la page creation de compte
-		//$this->viewBuilder()->setLayout('custom');
+		$this->viewBuilder()->setLayout('custom');
 
 		//récup toutes les lignes de la table
 		$u = $this->Users->find('all');
@@ -30,6 +29,8 @@ class UsersController extends AppController {
 
 	public function new(){
 
+		$this->viewBuilder()->setLayout('custom');
+
 		$new = $this->Users->newEmptyEntity();
 
 		if($this->request->is(['post', 'put'])){
@@ -38,34 +39,39 @@ class UsersController extends AppController {
 			$new->username = $this->request->getData('username');
 			$new->password = $this->request->getData('password');
 
-			//si le fichier n'est pas au bon format
-			if(empty($this->request->getData('avatar')->getClientFilename()) || 
-				!in_array($this->request->getData('avatar')->getClientMediaType(), ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'])) {
-				//erreur
-				$this->Flash->error('L\'image est obligatoire et doit être au format png, jpg ou gif.');
-			}else { //sinon (ok)
-
-				//on recup l'extension du fichier
-				$ext = pathinfo($this->request->getData('avatar')->getClientFilename(),PATHINFO_EXTENSION);
-				
-				//on  créé un nouveau nom pour le fichier
-				$newName = 'avatar-'.time().'-'.rand(0,9999999).'.'.$ext;
-
-				//on place ce nouveau nom dans l'entité
-				$new->avatar = $newName;
-
-				//on tente la sauvegarde de l'entité
-				if($this->Users->save($new) ){
-					//on déplace le fichier de la mémoire temporaire vers le dossier data
-					$this->request->getData('avatar')->moveTo(WWW_ROOT.'img/data/avatars/'.$newName);
-					//confirmation
-					$this->Flash->success('Compte créé');
-					//redirection
-					return $this->redirect(['controller' => 'Users', 'action' => 'login']);
-				} else {//sinon (pas sauvegardé)
+			if(!empty($this->request->getData('avatar')->getClientFilename())){
+				//si le fichier n'est pas au bon format
+				if(empty($this->request->getData('avatar')->getClientFilename()) || 
+					!in_array($this->request->getData('avatar')->getClientMediaType(), ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'])) {
 					//erreur
-					$this->Flash->error('Une erreur est survenue dans la création de votre compte. Réessayez.');
+					$this->Flash->error('L\'image est obligatoire et doit être au format png, jpg ou gif.');
+				}else { //sinon (ok)
+
+					//on recup l'extension du fichier
+					$ext = pathinfo($this->request->getData('avatar')->getClientFilename(),PATHINFO_EXTENSION);
+					
+					//on  créé un nouveau nom pour le fichier
+					$newName = 'avatar-'.time().'-'.rand(0,9999999).'.'.$ext;
+
+					//on place ce nouveau nom dans l'entité
+					$new->avatar = $newName;
+
+					
 				}
+			}
+
+			//on tente la sauvegarde de l'entité
+			if($this->Users->save($new) ){
+				//on déplace le fichier de la mémoire temporaire vers le dossier data
+				if(!empty($this->request->getData('avatar')->getClientFilename()))
+					$this->request->getData('avatar')->moveTo(WWW_ROOT.'img/data/avatars/'.$newName);
+				//confirmation
+				$this->Flash->success('Compte créé');
+				//redirection
+				return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+			} else {//sinon (pas sauvegardé)
+				//erreur
+				$this->Flash->error('Une erreur est survenue dans la création de votre compte. Réessayez.');
 			}
 		}
 
@@ -75,12 +81,14 @@ class UsersController extends AppController {
 
 	public function login(){
 
+		$this->viewBuilder()->setLayout('custom');
+
 		if($this->request->is(['post'])){
 
 			$res = $this->Authentication->getResult();
 
 			if($res->isValid()){
-				$this->Flash->success('Vous etes connecté');
+				$this->Flash->success('Vous êtes connecté');
 				return $this->redirect([
 					'controller' => 'Todolists',
 					'action' => 'index'
@@ -94,11 +102,14 @@ class UsersController extends AppController {
 	public function logout(){
 		$result = $this->Authentication->getResult();
 		$this->Authentication->logout();
-		$this->Flash->success('Vous etes déconnecté');
+		$this->Flash->success('Vous êtes déconnecté');
 		return $this->redirect(['action' => 'login']);
 	}
 
 	public function update($id = null){
+
+		$this->viewBuilder()->setLayout('custom');
+		
 		if(empty($id))
 			return $this->redirect(['action' => 'index']);
 
@@ -149,8 +160,6 @@ class UsersController extends AppController {
 					//On supprime l'ancien avatar
 					$file = new File(WWW_ROOT.'img/data/avatars/'.$oldAvatar);
 					$file->delete();
-					
-					// $this->Flash->success('Avatar modifié');
 				}
 				
 				//confirmation

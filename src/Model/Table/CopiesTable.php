@@ -5,25 +5,21 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-class UsersTable extends Table{
+class CopiesTable extends Table{
 	public function initialize(array $c):void{
 		parent::initialize($c);
 
 		$this->addBehavior('Timestamp');
 
-		$this->addBehavior('Avatar');
-
-		$this->hasMany('Todolists', [
-			'foreignKey' => 'user_id',
+		$this->belongsTo('Todolists', [
+			'foreignKey' => 'origin_id',
 			'joinType' => 'INNER'
 		]);
 	}
 
 	public function validationDefault(Validator $v) : Validator{
-		$v->maxLength('username', 30)
-			->notEmptyString('username')
-
-			->notEmptyString('password');
+		$v->notEmptyString('origin_id')
+			->notEmptyString('newlist_id');
 
 		return $v;
 	}
